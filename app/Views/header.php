@@ -122,6 +122,7 @@
         }
 
         .no-underline:hover {
+            color: #004d40;
             text-decoration: underline;
         }
 
