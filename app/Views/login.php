@@ -2,7 +2,7 @@
 <div class="login-container">
     <h1 style="font-weight: Bold;">ITSO Management System</h1>
     <?php if (session()->getFlashdata('msg')): ?>
-        <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
+        <div class="alert alert-danger text-center"><?= session()->getFlashdata('msg') ?></div>
     <?php endif; ?>
     <form action="<?= base_url('processLogin') ?>" method="post">
         <div class="form-group">
