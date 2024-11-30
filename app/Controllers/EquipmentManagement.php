@@ -104,7 +104,7 @@ class EquipmentManagement extends BaseController
     public function activate($id)
     {
         $equipmentModel = new EquipmentModel();
-        $equipmentModel->update($id, ['status' => 'In Stock']);
+        $equipmentModel->update($id, ['status' => 'Stock']);
 
         return redirect()->to('/equipment_management');
     }
