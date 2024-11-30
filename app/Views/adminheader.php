@@ -263,6 +263,69 @@
             gap: 10px;
         }
 
+
+        
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: border 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #00796b;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.btn-primary {
+    background-color: #00796b;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #005b4e;
+}
+
+h1.h2 {
+    color: #00796b;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-info p {
+    margin: 0;
+    color: #333;
+}
+
+
         @media (max-width: 768px) {
             .container-fluid {
                 padding-left: 60px;
@@ -285,6 +348,370 @@
             }
         }
     </style>
+
+
+<style>
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.table th {
+    background-color: #00796b;
+    color: white;
+}
+
+.btn-primary {
+    background-color: #00796b;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #005b4e;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-group .btn {
+    margin-right: 5px;
+}
+
+details {
+    margin-bottom: 15px;
+}
+
+details summary {
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
+    outline: none;
+}
+
+details summary::marker {
+    content: "";
+}
+
+details[open] summary::after {
+    content: "▲";
+    float: right;
+}
+
+details summary::after {
+    content: "▼";
+    float: right;
+}
+
+.list-group {
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+.list-group li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.list-group li:last-child {
+    border-bottom: none;
+}
+
+.list-group-header {
+    font-weight: bold;
+    text-align: left;
+    padding: 8px 0;
+}
+
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.table th {
+    background-color: #00796b;
+    color: white;
+}
+
+.table tr:hover {
+    background-color: light gray;
+}
+
+.btn-primary {
+    background-color: #00796b;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #005b4e;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    list-style-type: none;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-link {
+    color: #00796b;
+    border: 1px solid #00796b;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.pagination .page-link:hover {
+    background-color: #e9f1f5;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #00796b;
+    color: white;
+    border: 1px solid #00796b;
+}
+
+.group-header {
+    cursor: pointer;
+}
+
+.detail-header, .detail-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.detail-header {
+    background-color: white;
+    font-weight: bold;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 30px;
+}
+
+.table th, .table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.table th {
+    background-color: #00796b;
+    color: white;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #e9f1f5;
+}
+
+.btn-primary {
+    background-color: #00796b;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background-color: #005b4e;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    list-style-type: none;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-link {
+    color: #00796b;
+    border: 1px solid #00796b;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.pagination .page-link:hover {
+    background-color: #e9f1f5;
+}
+
+.group-header {
+    cursor: pointer;
+    background-color: #f5f5f5;
+}
+
+.group-details {
+    display: none;
+}
+
+.detail-header, .detail-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.detail-header {
+    font-weight: bold;
+}
+
+.detail-row {
+    border-top: 1px solid #ddd;
+}
+
+.action-buttons a,
+.action-buttons button {
+    margin-right: 5px;
+    text-decoration: none;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+</style>
 </head>
 <body>
 <div id="sidebar" class="sidebar">

@@ -34,5 +34,5 @@ $routes->post('equipment_management/store', 'EquipmentManagement::store');
 $routes->get('equipment_management/edit/(:num)', 'EquipmentManagement::edit/$1');
 $routes->post('equipment_management/update/(:num)', 'EquipmentManagement::update/$1');
 $routes->get('equipment_management/deactivate/(:num)', 'EquipmentManagement::deactivate/$1');
-
-
+$routes->get('equipment_management/activate/(:num)', 'EquipmentManagement::activate/$1');
+$routes->get('equipment_management/getLastItemID/(:segment)', 'EquipmentManagement::getLastItemID/$1');
