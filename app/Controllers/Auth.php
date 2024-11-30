@@ -22,18 +22,35 @@ class Auth extends BaseController
         $session = session();
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
-
+    
         $userModel = new UserModel();
         $user = $userModel->where('email', $email)->first();
-
+    
         if ($user) {
             if (password_verify($password, $user['password'])) {
                 if ($user['status'] == 1) {
                     $session->set([
+                        'user_id' => $user['id'],
                         'email' => $user['email'],
+                        'first_name' => $user['first_name'],
+                        'last_name' => $user['last_name'],
                         'isLoggedIn' => true,
                         'userType' => $user['user_type']
                     ]);
+    
+                    // Delete all records in current_user table
+                    $db = \Config\Database::connect();
+                    $builder = $db->table('current');
+                    $builder->truncate();
+    
+                    // Insert current user record
+                    $builder->insert([
+                        'user_id' => $user['id'],
+                        'first_name' => $user['first_name'],
+                        'last_name' => $user['last_name'],
+                        'email' => $user['email']
+                    ]);
+    
                     return redirect()->to('/dashboard');
                 } else {
                     $session->setFlashdata('msg', 'Account not activated. Please check your email for verification instructions.');
@@ -44,10 +61,10 @@ class Auth extends BaseController
         } else {
             $session->setFlashdata('msg', 'Account does not exist!');
         }
-
+    
         return redirect()->to('/');
     }
-
+    
 
     public function register()
     {
