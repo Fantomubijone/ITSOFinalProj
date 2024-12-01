@@ -69,32 +69,41 @@ class EquipmentManagement extends BaseController
         return redirect()->to('/equipment_management');
     }
 
+ 
     public function edit($id)
     {
         $equipmentModel = new EquipmentModel();
-        $data['item'] = $equipmentModel->find($id);
+        $data['equipment'] = $equipmentModel->find($id);
 
-        // Add user data to the view data
-        $data['first_name'] = session()->get('first_name');
-        $data['last_name'] = session()->get('last_name');
-        $data['email'] = session()->get('email');
-
-        return view('equipment_edit', $data);
+        return view('edit_equipment', $data);
     }
 
     public function update($id)
     {
         $equipmentModel = new EquipmentModel();
+        $data = $this->request->getPost();
 
-        $data = [
-            'name' => $this->request->getPost('name'),
-            'status' => $this->request->getPost('status'),
-        ];
+        if ($this->validate([
+            'name' => 'required',
+            'status' => 'required',
+            'category' => 'required'
+        ])) {
+            $updateData = [
+                'name' => $data['name'],
+                'status' => $data['status'],
+                'category' => $data['category']
+            ];
 
-        $equipmentModel->update($id, $data);
-
-        return redirect()->to('/equipment_management');
+            if ($equipmentModel->update($id, $updateData)) {
+                return redirect()->to('/equipment_management')->with('success', 'Equipment updated successfully');
+            } else {
+                return redirect()->back()->withInput()->with('errors', $equipmentModel->errors());
+            }
+        } else {
+            return redirect()->back()->withInput()->with('validation', $this->validator);
+        }
     }
+
 
     public function deactivate($id)
     {

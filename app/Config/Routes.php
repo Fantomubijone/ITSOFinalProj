@@ -55,3 +55,11 @@ $routes->get('reports/active_equipment', 'Reports::active_equipment');
 $routes->get('reports/unusable_equipment', 'Reports::unusable_equipment');
 $routes->get('reports/user_borrowing_history', 'Reports::user_borrowing_history');
 
+$routes->get('reservation', 'Reservation::index');
+$routes->get('reservation/create', 'Reservation::create');
+$routes->post('reservation/store', 'Reservation::store');
+$routes->get('reservation/edit/(:segment)', 'Reservation::edit/$1');
+$routes->post('reservation/update/(:segment)', 'Reservation::update/$1');
+$routes->get('reservation/delete/(:segment)', 'Reservation::delete/$1');
+
+
