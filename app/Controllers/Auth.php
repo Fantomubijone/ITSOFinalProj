@@ -285,7 +285,7 @@ class Auth extends BaseController
         $user = $userModel->where('activation_code', $activation_code)->first();
 
         if ($user) {
-            $userModel->update($user['id'], ['status' => 1, 'activation_code' => null]);
+            $userModel->update($user['id'], ['status' => 1]);
             session()->setFlashdata('success', 'Account activated successfully!');
             session()->set('activated', true); // Set session variable for activation
             return redirect()->to('/welcome');

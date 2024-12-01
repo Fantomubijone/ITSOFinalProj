@@ -20,12 +20,7 @@
         
 
         if ($session->get('userType') === 'ITSO_Personnel'): ?>
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="<?= base_url('itso_dashboard') ?>">
-                    <i class="fa-solid fa-gauge" style="color: #ffffff;"></i>
-                    <span class="nav-text">Dashboard</span>
-                </a>
-            </li>
+    
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('user_management') ?>">
                         <i class="fa-solid fa-user-cog" style="color: #ffffff;"></i>

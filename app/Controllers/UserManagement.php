@@ -3,11 +3,45 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
-use App\Models\CurrentModel;
+use App\Models\Currentmodel;
 
 
 class UserManagement extends BaseController
 {
+    public function create()
+    {
+        return view('create_user');
+    }
+
+    public function store()
+    {
+        $userModel = new UserModel();
+        $data = $this->request->getPost();
+
+        if ($this->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'school_id' => 'required',
+            'email' => 'required|valid_email|is_unique[users.email]',
+            'password' => 'required|min_length[6]',
+            'confirm_password' => 'required|matches[password]',
+            'user_type' => 'required'
+        ])) {
+            $userModel->save([
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'school_id' => $data['school_id'],
+                'email' => $data['email'],
+                'password' => password_hash($data['password'], PASSWORD_DEFAULT),
+                'user_type' => $data['user_type']
+            ]);
+
+            return redirect()->to('/user_management')->with('success', 'User added successfully');
+        } else {
+            return redirect()->back()->withInput()->with('validation', $this->validator);
+        }
+    }
+
     public function index()
     {
 
@@ -29,56 +63,52 @@ class UserManagement extends BaseController
         return view('user_management', $data);
     }
 
-    public function create()
-    {
-        return view('user_create');
-    }
+        public function edit($id)
+        {
+            $userModel = new UserModel();
+            $data['user'] = $userModel->find($id);
+    
+            return view('edit_user', $data);
+        }
+    
+        public function update($id)
+        {
+            $userModel = new UserModel();
+            $data = $this->request->getPost();
+    
+            // Ensure email cannot be changed
+            unset($data['email']);
+    
+            if ($this->validate([
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'school_id' => 'required',
+                'password' => 'permit_empty|min_length[6]',
+                'confirm_password' => 'matches[password]',
+                'user_type' => 'required'
+            ])) {
+                $updateData = [
+                    'first_name' => $data['first_name'],
+                    'last_name' => $data['last_name'],
+                    'school_id' => $data['school_id'],
+                    'user_type' => $data['user_type'],
+                ];
+    
+                if (!empty($data['password'])) {
+                    $updateData['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+                }
+    
+                if ($userModel->update($id, $updateData)) {
+                    return redirect()->to('/user_management')->with('success', 'User updated successfully');
+                } else {
+                    return redirect()->back()->withInput()->with('errors', $userModel->errors());
+                }
+            } else {
+                return redirect()->back()->withInput()->with('validation', $this->validator);
+            }
+        }
 
-    public function store()
-    {
-        $userModel = new UserModel();
-
-        $data = [
-            'school_id' => $this->request->getPost('school_id'),
-            'first_name' => ucwords(strtolower($this->request->getPost('first_name'))),
-            'last_name' => ucwords(strtolower($this->request->getPost('last_name'))),
-            'email' => $this->request->getPost('email'),
-            'user_type' => $this->request->getPost('user_type'),
-            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'status' => 1, // Default status to active
-        ];
-
-        $userModel->save($data);
-
-        return redirect()->to('/user_management');
-    }
-
-    public function edit($id)
-    {
-        $userModel = new UserModel();
-        $data['user'] = $userModel->find($id);
-
-        return view('user_edit', $data);
-    }
-
-    public function update($id)
-    {
-        $userModel = new UserModel();
-
-        $data = [
-            'school_id' => $this->request->getPost('school_id'),
-            'first_name' => ucwords(strtolower($this->request->getPost('first_name'))),
-            'last_name' => ucwords(strtolower($this->request->getPost('last_name'))),
-            'email' => $this->request->getPost('email'),
-            'user_type' => $this->request->getPost('user_type'),
-            'status' => $this->request->getPost('status'),
-        ];
-
-        $userModel->update($id, $data);
-
-        return redirect()->to('/user_management');
-    }
-
+    
     public function deactivate($id)
     {
         $userModel = new UserModel();
@@ -86,6 +116,15 @@ class UserManagement extends BaseController
 
         return redirect()->to('/user_management');
     }
+
+    public function activate($id)
+    {
+        $userModel = new UserModel();
+        $userModel->update($id, ['status' => 1]);
+
+        return redirect()->to('/user_management');
+    }
+
 
     public function update_account() {
         $session = session();

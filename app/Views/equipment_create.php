@@ -221,11 +221,11 @@ function generateFieldHtml(name, prefix) {
                 </div>
                 <div class="form-group col-md-6">
                     <label for="name_${prefix}">Name</label>
-                    <input type="text" id="name_${prefix}" name="name[]" class="form-control" value="${name}" readonly>
+                    <input type="text" id="name_${prefix}" name="name[]" class="form-control" placeholder = "Enter Item Name" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="name_${prefix}">Category</label>
-                    <input type="text" id="name_${prefix}" name="category[]" class="form-control">
+                    <input type="text" id="name_${prefix}" name="category[]" value="${name}" class="form-control" readonly>
                 </div>
             </div>
             <div class="form-row">

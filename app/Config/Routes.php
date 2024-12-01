@@ -21,11 +21,15 @@ $routes->get('associate_dashboard', 'Dashboard::associate_dashboard');
 $routes->get('student_dashboard', 'Dashboard::student_dashboard');
 
 $routes->get('user_management', 'UserManagement::index');
-$routes->get('create', 'UserManagement::create');
-$routes->post('store', 'UserManagement::store');
-$routes->get('edit/(:num)', 'UserManagement::edit/$1');
-$routes->post('update/(:num)', 'UserManagement::update/$1');
-$routes->get('deactivate/(:num)', 'UserManagement::deactivate/$1');
+$routes->get('user_management/create', 'UserManagement::create');
+$routes->post('user_management/store', 'UserManagement::store');
+
+$routes->get('user_management/edit/(:segment)', 'UserManagement::edit/$1');
+$routes->post('user_management/update/(:segment)', 'UserManagement::update/$1');
+
+$routes->get('user_management/deactivate/(:num)', 'UserManagement::deactivate/$1');
+$routes->get('user_management/activate/(:num)', 'UserManagement::activate/$1');
+
 $routes->get('user_management/update_account', 'UserManagement::update_account');
 $routes->get('user_management/updateCurrent', 'UserManagement::updateCurrent');
 $routes->post('user_management/updateCurrent', 'UserManagement::updateCurrent');
@@ -43,4 +47,11 @@ $routes->get('equipment_management/getLastItemID/(:segment)', 'EquipmentManageme
 
 $routes->get('borrow', 'Borrow::index'); // Page to search and select items for borrowing
 $routes->post('borrow_items', 'Borrow::borrow_items'); // API route to handle borrowing items
-$routes->post('send_borrow_email', 'Borrow::send_borrow_email'); // API route to handle sending emails
+$routes->get('return', 'Borrow::return_index'); // Page to search and select items for returning
+$routes->post('return_items', 'Borrow::return_items'); // API route to handle returning items
+
+$routes->get('reports', 'Reports::index');
+$routes->get('reports/active_equipment', 'Reports::active_equipment');
+$routes->get('reports/unusable_equipment', 'Reports::unusable_equipment');
+$routes->get('reports/user_borrowing_history', 'Reports::user_borrowing_history');
+

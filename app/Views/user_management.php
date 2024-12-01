@@ -40,13 +40,17 @@
 <script>
 const users = <?= json_encode($users) ?>; // Users data from server
 let currentPage = 1;
-const itemsPerPage = 5; // Number of items per page
+const itemsPerPage = 8; // Number of items per page
 
 function generateTableRows(data) {
     const tableBody = document.getElementById('userTableBody');
     tableBody.innerHTML = ''; // Clear the table body
 
     data.forEach(user => {
+        const actionButton = user.status == 1 
+            ? `<a href="<?= base_url('user_management/deactivate/') ?>${user.id}" class="btn btn-danger btn-sm">Deactivate</a>` 
+            : `<a href="<?= base_url('user_management/activate/') ?>${user.id}" class="btn btn-success btn-sm">Activate</a>`;
+
         const row = `
             <tr>
                 <td>${user.id}</td>
@@ -54,10 +58,10 @@ function generateTableRows(data) {
                 <td>${user.first_name} ${user.last_name}</td>
                 <td>${user.email}</td>
                 <td>${user.user_type}</td>
-                <td>${user.status ? 'Active' : 'Deactivated'}</td>
-                <td class="action-buttons" style= "white-space: nowrap; word-wrap: normal; word-break: normal;">
+                <td>${(user.status == 1) ? 'Active' : 'Deactivated'}</td>
+                <td class="action-buttons" style="white-space: nowrap; word-wrap: normal; word-break: normal;">
                     <a href="<?= base_url('user_management/edit/') ?>${user.id}" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="<?= base_url('user_management/deactivate/') ?>${user.id}" class="btn btn-danger btn-sm">Deactivate</a>
+                    ${actionButton}
                 </td>
             </tr>
         `;
