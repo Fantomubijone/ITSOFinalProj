@@ -44,6 +44,8 @@ class EquipmentManagement extends BaseController
         $names = $this->request->getPost('name');
         $statuses = $this->request->getPost('status');
         $quantities = $this->request->getPost('item_count');
+        $category = $this->request->getPost('category');
+    
 
         foreach ($names as $index => $name) {
             $itemIDPrefix = strtoupper(str_replace(['a', 'e', 'i', 'o', 'u'], '', $name));
@@ -56,7 +58,8 @@ class EquipmentManagement extends BaseController
                 $data = [
                     'item_id' => $itemID,
                     'name' => $name,
-                    'status' => $statuses[$index]
+                    'status' => $statuses[$index],
+                    'category' => strtoupper($category[$index])
                 ];
 
                 $equipmentModel->save($data);

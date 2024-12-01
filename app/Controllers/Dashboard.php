@@ -10,7 +10,7 @@ class Dashboard extends BaseController
         if (!$session->get('isLoggedIn')) {
             return redirect()->to('/');
         }
-        
+
         $userType = $session->get('userType');
         return view('dashboard', ['userType' => $userType]);
     }
@@ -25,27 +25,44 @@ class Dashboard extends BaseController
         $data = [
             'first_name' => $session->get('first_name'),
             'last_name' => $session->get('last_name'),
-            'email' => $session->get('email')
+            'email' => $session->get('email'),
+            'userRole' => 'ITSO_Personnel'
         ];
 
         return view('itso_dashboard', $data);
     }
-    
+
     public function associate_dashboard()
     {
-        if (session()->get('userType') != 'Associate') {
+        $session = session();
+        if ($session->get('userType') != 'Associate') {
             return redirect()->to('/');
         }
 
-        return view('associate_dashboard');
+        $data = [
+            'first_name' => $session->get('first_name'),
+            'last_name' => $session->get('last_name'),
+            'email' => $session->get('email'),
+            'userRole' => 'Associate'
+        ];
+
+        return view('associate_dashboard', $data);
     }
 
     public function student_dashboard()
     {
-        if (session()->get('userType') != 'Student') {
+        $session = session();
+        if ($session->get('userType') != 'Student') {
             return redirect()->to('/');
         }
 
-        return view('student_dashboard');
+        $data = [
+            'first_name' => $session->get('first_name'),
+            'last_name' => $session->get('last_name'),
+            'email' => $session->get('email'),
+            'userRole' => 'Student'
+        ];
+
+        return view('student_dashboard', $data);
     }
 }

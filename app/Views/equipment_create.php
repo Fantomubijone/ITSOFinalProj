@@ -19,12 +19,12 @@
                         <label for="name">Select Item</label>
                         <select id="name" name="name" class="form-control" onchange="populateFormFields(this.value)" required>
                             <option value="" disabled selected>Select Item Type</option>
-                            <option value="Laptop">Laptop (with its charger)</option>
-                            <option value="Projector">Projector (with an extension cord, and power cable)</option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="Projector">Projector</option>
                             <option value="HDMI Cable">HDMI Cable</option>
                             <option value="VGA Cable">VGA Cable</option>
                             <option value="Projector Remote">Projector Remote</option>
-                            <option value="Keyboard and Mouse">Keyboard and Mouse (with lightning cable)</option>
+                            <option value="Keyboard">Keyboard and Mouse (with lightning cable)</option>
                             <option value="Wacom Tablet">Wacom Tablet (with its pen)</option>
                             <option value="Speaker Set">Speaker Set</option>
                             <option value="Webcam">Webcam</option>
@@ -101,20 +101,52 @@ h1.h2 {
     color: #00796b;
 }
 
-.profile {
-    display: flex;
-    align-items: center;
+.dynamic-item-container {
+    background: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile-info p {
-    margin: 0;
+.item-header h3 {
+    color: #00796b;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.form-row {
+    /* display: flex; */
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 250px; /* Ensures smaller fields don't shrink too much */
+}
+
+label {
+    font-weight: bold;
     color: #333;
 }
 
-.profile i {
-    margin-right: 10px;
-    color: #00796b;
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: border 0.2s ease-in-out;
 }
+
+.form-control:focus {
+    border-color: #00796b;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
 </style>
 
 <script>
@@ -139,7 +171,7 @@ function populateFormFields(item) {
         case 'Projector Remote':
             itemIDPrefix = 'PRJCTR-RMTE';
             break;
-        case 'Keyboard and Mouse':
+        case 'Keyboard':
             itemIDPrefix = 'KYBRD';
             dynamicFields.innerHTML += generateFieldHtml('Mouse', 'MSE');
             dynamicFields.innerHTML += generateFieldHtml('Lightning Cable', 'LGTNG');
@@ -178,27 +210,41 @@ function populateFormFields(item) {
 
 function generateFieldHtml(name, prefix) {
     return `
-        <div class="form-group">
-            <label for="item_id_${prefix}">Item ID</label>
-            <input type="text" id="item_id_${prefix}" name="item_id[]" class="form-control" readonly>
-        </div>
-        <div class="form-group">
-            <label for="name_${prefix}">Name</label>
-            <input type="text" id="name_${prefix}" name="name[]" class="form-control" value="${name}" readonly>
-        </div>
-        <div class="form-group">
-            <label for="item_count_${prefix}">Quantity</label>
-            <input type="number" id="item_count_${prefix}" name="item_count[]" class="form-control" min="1" value="1" required oninput="updateItemIDs('${prefix}', this.value)">
-        </div>
-        <div class="form-group">
-            <label for="status_${prefix}">Status</label>
-            <select id="status_${prefix}" name="status[]" class="form-control" required>
-                <option value="Stock">Stock</option>
-                <option value="Defective">Defective</option>
-            </select>
+        <div class="dynamic-item-container">
+            <div class="item-header">
+                <h3>${name}</h3>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="item_id_${prefix}">Item ID</label>
+                    <input type="text" id="item_id_${prefix}" name="item_id[]" class="form-control" readonly>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="name_${prefix}">Name</label>
+                    <input type="text" id="name_${prefix}" name="name[]" class="form-control" value="${name}" readonly>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="name_${prefix}">Category</label>
+                    <input type="text" id="name_${prefix}" name="category[]" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="item_count_${prefix}">Quantity</label>
+                    <input type="number" id="item_count_${prefix}" name="item_count[]" class="form-control" min="1" value="1" required oninput="updateItemIDs('${prefix}', this.value)">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="status_${prefix}">Status</label>
+                    <select id="status_${prefix}" name="status[]" class="form-control" required>
+                        <option value="Stock">Stock</option>
+                        <option value="Defective">Defective</option>
+                    </select>
+                </div>
+            </div>
         </div>
     `;
 }
+
 
 function updateItemIDs(prefix, count) {
     const idField = document.getElementById(`item_id_${prefix}`);

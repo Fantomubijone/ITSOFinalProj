@@ -26,6 +26,9 @@ $routes->post('store', 'UserManagement::store');
 $routes->get('edit/(:num)', 'UserManagement::edit/$1');
 $routes->post('update/(:num)', 'UserManagement::update/$1');
 $routes->get('deactivate/(:num)', 'UserManagement::deactivate/$1');
+$routes->get('user_management/update_account', 'UserManagement::update_account');
+$routes->get('user_management/updateCurrent', 'UserManagement::updateCurrent');
+$routes->post('user_management/updateCurrent', 'UserManagement::updateCurrent');
 
 
 $routes->get('equipment_management', 'EquipmentManagement::index');
@@ -36,3 +39,8 @@ $routes->post('equipment_management/update/(:num)', 'EquipmentManagement::update
 $routes->get('equipment_management/deactivate/(:num)', 'EquipmentManagement::deactivate/$1');
 $routes->get('equipment_management/activate/(:num)', 'EquipmentManagement::activate/$1');
 $routes->get('equipment_management/getLastItemID/(:segment)', 'EquipmentManagement::getLastItemID/$1');
+
+
+$routes->get('borrow', 'Borrow::index'); // Page to search and select items for borrowing
+$routes->post('borrow_items', 'Borrow::borrow_items'); // API route to handle borrowing items
+$routes->post('send_borrow_email', 'Borrow::send_borrow_email'); // API route to handle sending emails
